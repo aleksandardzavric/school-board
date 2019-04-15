@@ -14,5 +14,15 @@
     $db = new Database($config['db']);
     $studentModel = new Student($db);
     $studentController = new StudentController($studentModel);
-    $studentController->getStudentInfo($student);
+    $studentData = $studentController->getStudentInfo($student);
+    if (is_null($studentData)) {
+      return;
+    }
+    if ($studentData['format'] === 'XML') {
+      header("Content-type: text/xml; charset=utf-8");
+      print arrayToXml($studentData['data']);
+    } else {
+      header('Content-Type: application/json');
+      echo json_encode($studentData['data']);
+    }
   }

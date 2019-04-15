@@ -17,7 +17,7 @@
         $student['grades'] = [];
         $gradesData = $this->db->query($sqlGrades,'i',$idStudent);
         while ($grade = $gradesData->fetch_assoc()) {
-          $student['grades'][] = $grade;
+          $student['grades'][] = $grade['grade'];
         }
         return $student;
       }

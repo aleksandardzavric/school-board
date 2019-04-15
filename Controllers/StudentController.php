@@ -20,7 +20,7 @@
         'data' => [
           'id' => $idStudent,
           'name' => $student['name'],
-          'grades' => $student['grades'],
+          'grades' => implode(',',$student['grades']),
           'average' => $boardData['average'],
           'passed' => $boardData['passed']
         ],
@@ -32,7 +32,7 @@
       $gradeNumber = count($student['grades']);
       $sum = 0;
       foreach ($student['grades'] as $grade) {
-        $sum += $grade['grade'];
+        $sum += $grade;
       }
       $average = $sum / $gradeNumber;
       $passed = $average >= 7 ? 'Pass' : 'Fail';
@@ -51,13 +51,13 @@
       $max = 0;
       $sum = 0;
       foreach ($student['grades'] as $grade) {
-        if ($grade['grade'] > $max) {
-          $max = $grade['grade'];
+        if ($grade > $max) {
+          $max = $grade;
         }
-        if ($grade['grade'] < $min) {
-          $min = $grade['grade'];
+        if ($grade < $min) {
+          $min = $grade;
         }
-        $sum += $grade['grade'];
+        $sum += $grade;
       }
       if ($gradeNumber > 2) {
         $sum -= $min;
